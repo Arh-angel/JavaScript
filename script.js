@@ -1,235 +1,367 @@
-/* 1. Используя метод map() напишите код, который получает из массива строк новый массив, содержащий их длины.
+/* 1. Что будет выведено в консоль? Ответить не запуская код
+ */
+// function foo() {
+//  	console.log(this);
+// }
+// foo()
+//Ответ: undefined  в строгом режиме, window без
+
+/* 2. Что будет выведено в консоль? Ответить не запуская код
+ */
+// const obj = {
+//  name: 'Дмитрий',
+//  getName() {
+//  console.log(this.name);
+// },
+// };
+// obj.getName();
+//Ответ: Дмитрий
+
+/* 3. Что будет выведено в консоль? Ответить не запуская код
+ */
+// const obj = {
+//  name: 'Дмитрий',
+//  getName() {
+//    function bar() {
+//      console.log(this.name);
+//    }
+//    bar();
+//  },
+// };
+// obj.getName();
+//Ответ: undefined
+
+/* 4. Что будет выведено в консоль? Ответить не запуская код
+ */
+// const obj = {
+//  name: 'Дмитрий',
+//  getName: () => {
+//    function bar() {
+//      console.log(this.name);
+//    }
+//    bar();
+//  },
+// };
+// obj.getName();
+//Ответ: undefined
+
+/* 5. Что будет выведено в консоль? Ответить не запуская код
+ */
+// const obj = {
+//  name: 'Дмитрий',
+//  getName() {
+//    const bar = () => {
+//      console.log(this.name);
+//    }
+//    bar();
+//  },
+// };
+// obj.getName();
+//Ответ: Дмитрий
+
+/* 6. Что будет выведено в консоль? Ответить не запуская код */
+
+// const obj = {
+//  name: 'Дмитрий',
+//  getName() {
+//    console.log(this.name);
+//  },
+// };
+ 
+// const obj2 = {
+//  getName: obj.getName,
+// };
+ 
+// obj2.getName();
+//Ответ: undefined
+
+/* 7. Что будет выведено в консоль? Ответить не запуская код */
+
+// const getName = () => {
+//  console.log(this.name);
+// };
+ 
+// const obj = {
+//  name: 'Дмитрий',
+//  getName,
+// };
+ 
+// const obj2 = {
+//  getName,
+// };
+// obj.getName();
+//Ответ: window
+// obj2.getName();
+//Ответ: window
+
+/* 8. Что будет выведено в консоль? Ответить не запуская код */
+
+// const obj = {
+//  name: 'Дмитрий',
+//  friend: {
+//    name: 'Владимир',
+//    getName() {
+//      function innerGetName() {
+//        console.log(this.name);
+//      }
+//      innerGetName();
+//    },
+//  },
+// };
+ 
+// obj.friend.getName();
+//Ответ: undefined
+
+/* 9. Что будет выведено в консоль? Ответить не запуская код */
+
+// const obj = {
+//  name: 'Дмитрий',
+//  friend: {
+//    name: 'Владимир',
+//    getName() {
+//      return function() {
+//        console.log(this.name);
+//      }
+//    },
+//  },
+// };
+//  obj.friend.getName()();
+//Ответ: undefined
+
+
+/* 10. Что будет выведено в консоль? Ответить не запуская код */
+// const obj = {
+//  name: 'Дмитрий',
+//  friend: {
+//    name: 'Владимир',
+//    getName() {
+//      return () =>  {
+//        console.log(this.name);
+//      }
+//    },
+//  },
+// };
+// obj.friend.getName()();
+//Ответ: Владимир
+
+// 11. Что будет выведено в консоль? Ответить не запуская код
+// const object = {
+//  		message: 'Hello, World!',
+//  		logMessage() {
+//    		console.log(this.message);
+//  		}
+// };
+// setTimeout(object.logMessage, 1000);
+//Ответ:  в теории передасться тело метода, но это значение ссылочного типа и поэтому скорее всего операция пройдет без вызова и мы не получим this и результатом скорее всего будет undefined
+
+/* 12. Воспользуйтесь функцией logMessage таким образом, чтобы в консоли увидеть сообщение "Hello, World!"
  */
 
-// let vegetables = ['Капуста', 'Репа', 'Редиска', 'Морковка'];
+// const object = {
+//  message: 'Hello, World!'
+// };
+// function logMessage() {
+//  console.log(this.message); // "Hello, World!"
+// }
 
-// let vegetableLength = vegetables.map(item => item.length);
+//Ответ: object.logMessage = logMessage();
 
-// console.log( vegetableLength ); // 7,4,7,8
 
-/* 2. Имеется массив простых чисел: numbers = [2, 3, 5, 7, 11, 13, 17, 19]. Использую метод reduce() напишите функцию currentSums(numbers), которая возвращает новый массив из такого же числа элементов, в котором на каждой позиции будет находиться сумма элементов массива numbers до этой позиции включительно.
+/* 13. Что будет выведено в консоль? Ответить не запуская код */
+// var length = 4;
+// function callback() {
+//  console.log(this.length); // What is logged?       undefined
+// }
+// const object = {
+//  length: 5,
+//  method(callback) { 
+//    callback();
+//  }
+// };
+// object.method(callback, 1, 2);
+//если все как я думаю то передастся в метод тело первой функции и после отработает метод и выведет 5
+
+/* 14. Реализовать объект калькулятора calculator с 3 методами. Первый метод setValues(a, b) присваивает значения свойствам a и b.Второй sum()(обратите внимание, что он не принимает аргументы)  возвращает сумму свойств a и b текущего объекта или сообщение об ошибке, если значения свойств не присвоены. Третий метод mult() возвращает произведение свойств a и b текущего объекта или сообщение об ошибке, если значения свойств не присвоены.
  */
-// let numbers = [2, 3, 5, 7, 11, 13, 17]
 
-// let currentSums = (arr) => arr.reduce((newArr, item, index) => {
-
-    // if(newArr.length === 0) {
-    //    newArr.push(item)
-    // } else {
-    //     newArr.push(newArr[index - 1] + item);
-    // }
-
-    
-
-    // let sum = 0;
-
-    // for(let i = 0; i <= index; i++) {
-    //     sum += arr[i];
-    // }
-
-    // newArr.push(sum);
-
-//     return newArr;
-//   }, []); 
-
-// console.log(currentSums(numbers)); // [2, 2+3, 2+3+5, 2+3+5+7, 2+3+5+7+11, 2+3+5+7+11+13, 2+3+5+7+11+13+17] = [ 2,5,10,17,28,41,58]
-
-/* 3 Напишите код, который получает из массива чисел новый массив, содержащий пары чисел, которые в сумме должны быть равны семи: (0:7), (1:6) и т.д. */
-
-// let arr = [0, 1, 2, 3, 4, 5, 6, 7];
-
-// function sumSeven(numbers) {
-//     let newArr = [];
-
-//     numbers.forEach(element => {
-//         numbers.forEach(item => {
-//             if(item + element === 7) {
-//                 newArr.push(`${element} + ${item}`);
-//             }
-//         })
-//     });
-
-//     return newArr;
-// }
-
-// console.log(sumSeven(arr));
-
-/* 4 Перед вами переменная, содержащая строку. Напишите код, создащий массив, который будет состоять из первых букв слов строки str.  */
-
-// let str = "Каждый охотник желает знать, где сидит фазан."; 
-
-// let foo = str => {
-//     return str.split(' ').map(element => element[0])
-// }
-
-// console.log(foo(str));  // [К,о,ж,з,г,с,ф]
-
-/* 5 Перед вами переменная, содержащая строку. Напишите код, создащий массив, который будет состоять из строк, состоящих из предыдущего, текущего и следующего символа строки str.*/
-
-// let str = "JavaScript"; 
-
-// let foo = str => str.split('').map((element, item, arr) => {
-//     if(!arr[item - 1]) {
-//         return `${element}` + `${arr[item + 1]}`;
-//     } else if(!arr[item + 1]) {
-//         return `${arr[item - 1]}` + `${element}`;
-//     } else {
-//         return `${arr[item - 1]}` + `${element}` + `${arr[item + 1]}`
+// let calculator = {
+//     setValues(a, b) {
+//         this.a = a;
+//         this.b = b;
+//     },
+//     sum() {
+//         if(this.a === undefined || this.b === undefined) {
+//             return 'error';
+//         } else {
+//             return this.a + this.b;
+//         }
+//     },
+//     mult() {
+//         if(this.a === undefined || this.b === undefined) {
+//             return 'error';
+//         } else {
+//             return this.a * this.b;
+//         }
 //     }
-// }) 
+// }
 
-// console.log(foo(str)); // [Ja,Jav,ava,vaS,aSc,Scr,cri,rip,ipt,pt] 
+// console.log(calculator.setValues(5, 2));
+// console.log(calculator.sum());
+// console.log(calculator.mult());
 
-/* 6 Напишите код, преобразующий массив цифр, которые располагаются неупорядоченно, в массив цифр расположенных по убыванию их значений.
+/* 15. Дополнительно: сделать в функции setValues(a, b) проверку и разрешить присвоение только чисел, иначе возвращать сообщение об ошибке.
  */
 
-// let numerics = [5, 7, 2, 9, 3, 1, 8];
-
-// let foo = arr => arr.sort((a, b) => b - a);
-
-// console.log(foo(numerics)); // [9,8,7,5,3,2,1]
-
-/* 7 Напишите код, объединяющий три массива цифр, и располагающий цифры, в полученном массиве, в порядке убывания их значений.
- */
-// let a = [1,2,3];
-// let b = [4,5,6];
-// let c = [7,8,9];
-// function getArr(a, b, c) {
-//     let newArr = [...a, ...b, ...c];
+/* let calculator = {
+        setValues(a, b) {
+            if(!isNaN(a) && !isNaN(b)) {
+                this.a = a;
+                this.b = b;
+            } else {
+                return 'Ошибка!!! Введите число';
+            }  
+        },
+        sum() {
+            if(this.a === undefined || this.b === undefined) {
+                return 'error';
+            } else {
+                return this.a + this.b;
+            }
+        },
+        mult() {
+            if(this.a === undefined || this.b === undefined) {
+                return 'error';
+            } else {
+                return this.a * this.b;
+            }
+        }
+    } */
     
-//     return newArr.sort((a, b) => b - a);
-// }
+//     console.log(calculator.setValues(5, 3));
+//     console.log(calculator.sum());
+//     console.log(calculator.mult());
 
-// console.log(getArr(a, b, c)); // [9,8,7,6,5,4,3, 2, 1]
+/* 16. Создать объект calculator2 с 3 методами. 1 метод - setVales(a, b) - создать используя метод из предыдущего задания(можно скопировать по ссылке метод из объекта calculator либо создать функцию setValues, как мы делали на лекции и присвоить обоим объектам). 2 метод - div() - возвращает результат деления a на b. 3 метод - diff() - возвращает разность чисел a и b.
+ */
 
-/* 8 Дан двухмерный массив с числами, например [[1, 2, 3], [4, 5], [6]]. Найдите сумму элементов этого массива. Массив, конечно же, может быть произвольным. Показать решение. */
-
-// let arr = [[1, 2, 3], [4, 5], [6]];
-
-// let sum = arr => arr.reduce((sum, current) => {
-//     return sum += current.reduce((accum, item) => accum + item)
-// }, 0);
-
-// console.log(sum(arr));
-
-/* 9 Дан трехмерный массив с числами, например [[[1, 2], [3, 4]], [[5, 6], [7, 8]]]. Найдите сумму элементов этого массива. Массив, конечно же, может быть произвольным. */
-
-// let arr = [[[1, 2], [3, 4]], [[5, 6], [7, 8]]];
-
-// let sum = arr => arr.reduce((sum, current) => {
-//     return sum += current.reduce((sum, current) => {
-//         return sum += current.reduce((sum, current) => sum + current);
-//     }, 0);
-// }, 0);
-
-// console.log(sum(arr));
-
-/* 10 Дан массив с числами. Не используя метода reverse переверните его элементы в обратном порядке. */
-
-// let arr = [9,8,7,6,5,4,3, 2, 1];
-
-// arr.sort((a, b) => a - b);
-
-// console.log(arr);
-
-/* 11 Дан массив с числами. Узнайте сколько элементов с начала массива надо сложить, чтобы в сумме получилось больше 10-ти. */
-
-// let arr = [5, 1, 2, 2, 3, 1, 8];
-
-// let counter = arr => arr.reduce((sum, item) => {
-//     if(sum.result <= 10) {
-//         sum.result += item;
-//         sum.counter++
-//     } 
-
-//     return sum
-// }, {result: 0, counter: 0});
-
-// console.log(counter(arr).counter);
-
-/* 12 Сделайте функцию arrayFill, которая будет заполнять массив заданными значениями. Первым параметром функция принимает значение, которым заполнять массив, а вторым - сколько элементов должно быть в массиве. Пример: arrayFill('x', 5) сделает массив ['x', 'x', 'x', 'x', 'x']. */
-
-// let arrayFill = (elem, num) => elem.repeat(num).split('');
-
-// console.log(arrayFill('x', 5));
-
-/* 13 Создайте объект и скопируйте данный объект с помощью: Object.assign() и spread оператора. Изменить любое свойство в копии объекта, и проверить не изменился ли исходный. */
-
-// let obj = {
-//     name: 'Alexander',
-//     age: 25,
-// }
-
-// let newObj = Object.assign({}, obj);
-
-// newObj.age = 27;
-
-// let nextObj = {...obj};
-
-// nextObj.age = 30;
-
-// console.log(`первый обьект возрост ${obj.age} новый обьект возрост ${nextObj.age}`)
-
-/* 14 Создайте функцию, которая принимает 1 аргумент - объект пользователя user со свойствами name, age, city. Функция должна возвращать новый объект пользователя с измененным полем name, при этом оригинальный объект user должен остаться неизменным. */
-
-// let obj = {
-//     name: 'Alexander',
-//     age: 25,
-//     city: 'Rostov'
-// }
-
-// function newUser(obj) {
-//     let newObj = {...obj};
-//     newObj.name = 'Vasy';
-
-//     return newObj;
+// let calculatorTwo = {
 // };
 
-// console.log(newUser(obj));
-// console.log(obj);
+// let setValues = (a, b) => {
+//     if(!isNaN(a) && !isNaN(b)) {
+//         this.a = a;
+//         this.b = b;
+//     } else {
+//         return 'Ошибка!!! Введите число';
+//     }  
+// };
 
-/* 15 Написать функцию которая будет принимать n-ое количество аргументов, в качестве результата функция будет возвращать сумму всех четных элементов. Для решения использовать цикл for (... of ...).  */
+// calculatorTwo.setValues = setValues;
 
-// function sum(...arg) {
-//     let sum = 0;
+// calculatorTwo.div = () => this.a / this.b;
 
-//     for(value of arg) {
-//         if(value % 2 === 0) {
-//             sum += value;
-//         }
-//     }
+// calculatorTwo.diff = () => this.a - this.b;
 
-//     return sum;
+// console.log(calculatorTwo.setValues(5, 3));
+// console.log(calculatorTwo.div());
+// console.log(calculatorTwo.diff());
+
+/* 17. Создать объект пользователя  user1 со свойствам name, age, city, favoriteColor и методами setName, setAge, setCity, setFavoriteColor, которые меняют значения соответствующих свойств. Создать объект второго юзера user2 из существующего объекта user1. Изменить значения всех свойств второго юзера с помощью методов setName, setAge, setCity, setFavoriteColor. Вывести в консоль оба объекта и убедиться, что значения свойств разные.
+ */
+
+// let userOne = {
+//     name: 'Vasya',
+//     age: 23,
+//     city: 'N.Novgorod',
+//     favoriteColor: 'red',
+//     setName(newName) {
+//         this.name = newName;
+//     },
+//     setAge(newAge) {
+//         this.age = newAge;
+//     },
+//     setCity(newCity) {
+//         this.city = newCity;
+//     },
+//     setFavoriteColor(newFavoriteColor) {
+//         this.favoriteColor = newFavoriteColor;
+//     },
 // }
 
-// console.log(sum(5, 6, 1, 2, 3, 4))
+// let userTwo = Object.assign({}, userOne);
 
-/* 16 Написать функцию, которая принимает слово и возвращает true, если слово является палиндромом. */
+// userTwo.setName('Nicolas');
+// userTwo.setAge(28);
+// userTwo.setCity('Monxeton');
+// userTwo.setFavoriteColor('Blue');
+// console.log(userOne);
+// console.log(userTwo);
 
-// let str = 'онa';
 
-// let palindrome = str => str === str.split('').reverse().join('');
+/* 18. Реализовать функцию, которая принимает в себя любое количество числовых аргументов и возвращает наименьшее число. (не использовать Math.min).*/
 
-// console.log(palindrome(str));
-
-/* 17 Написать функцию которая будет принимать два массива, и в качестве
-результата будет возвращать только те значения которые есть и в первом и во втором массиве. */
-
-// let arr = [5, 6, 7, 2, 3, 6];
-// let arrTwo = [9, 16, 7, 2, 53, 6];
-
-// let newArr = (arr, arrTwo) => {
-//     let newArr = [];
-    
-//     arr.forEach(element => arrTwo.forEach(item => {
-//         if(element === item) {
-//             return newArr.push(item);
-//         }
-//     }));
-
-//     return newArr;
+// function minNum(...nums) {
+//     return nums.sort((a, b) => a - b)[0];
 // }
 
-// console.log(newArr(arr, arrTwo))
+// console.log(minNum(5, 3, 4, 6, 8))
 
+/*Исправьте код таким образом, чтобы вывод логов соответствовал комментариями */
+// const func = (user) => {
+//   const otherUser = Object.assign({}, user);
+//   otherUser.name = 'Дмитрий';
+//   otherUser.surName = 'Сидоров';
+//   return otherUser;
+// }
 
+// const  firstUser = {
+//   name: 'Василий',
+//   surName: 'Иванов'
+// }
+
+// console.log(func(firstUser)) // { name: 'Дмитрий', surName: 'Сидоров' }
+
+// console.log(firstUser) // { name: 'Василий', surName: 'Иванов' }
+
+/* 19. Создайте объекты двух персонажей с именами(name) с числовыми характеристиками уровня(level), силы(strength), ловкости(agility) и интелекта(intellect). 
+Для обоих персонажей создайте метод attack, который рассчитывает и возвращает урон атаки путем сложения силы и ловкости, и метод fireball, который возвращает урон файерболом путем умножения интеллекта на уровень персонажа. Далее создайте метод combo, который возвращает сумму значений, которые возвращают методы  attack и fireball. 
+После формирования объектов персонажей создайте функцию startFight, которая принимает в себя два объекта и сравнивает результаты вызовов их методов combo и возвращает строку “Победил ИМЯ_ПЕРСОНАЖА”.
+ */
+
+class Pers {
+    constructor(name, level, strength, agility, intellect) {
+        this.name = name;
+        this.level = level;
+        this.strength = strength;
+        this.agility = agility;
+        this.intellect = intellect;
+    }
+
+    attack() {
+        this.strength + this.agility
+    }
+
+    fireball() {
+        this.intellect * this.level 
+    }
+
+    combo() {
+        this.attack() + this.fireball()
+    }
+}
+
+let persOne = new Pers('Poll', 5, 6, 8, 10);
+console.log(persOne)
+
+let persTwo = new Pers('Will', 5, 4, 3, 15);
+console.log(persTwo)
+
+let startFight = (persOne, persTwo) => {
+    if(persOne.combo() > persTwo.combo()) {
+        return `${persOne.name} выйграл` 
+    } else {
+        return `${persTwo.name} выйграл`
+    }
+} 
+
+console.log(startFight(persOne, persTwo));
