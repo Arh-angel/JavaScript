@@ -1,367 +1,152 @@
-/* 1. Что будет выведено в консоль? Ответить не запуская код
- */
-// function foo() {
-//  	console.log(this);
-// }
-// foo()
-//Ответ: undefined  в строгом режиме, window без
+/* 1. Реализовать объект пользователя с полями name, lastname ,middleName, birthDate. Реализовать геттер/сеттер fullname, который возвращает одной строкой полное имя пользователя и записывает имя, фамилию и отчество при присвоении значения. Реализовать геттер age, который возвращает возраст используя данные даты рождения. */
 
-/* 2. Что будет выведено в консоль? Ответить не запуская код
- */
-// const obj = {
-//  name: 'Дмитрий',
-//  getName() {
-//  console.log(this.name);
-// },
-// };
-// obj.getName();
-//Ответ: Дмитрий
-
-/* 3. Что будет выведено в консоль? Ответить не запуская код
- */
-// const obj = {
-//  name: 'Дмитрий',
-//  getName() {
-//    function bar() {
-//      console.log(this.name);
-//    }
-//    bar();
-//  },
-// };
-// obj.getName();
-//Ответ: undefined
-
-/* 4. Что будет выведено в консоль? Ответить не запуская код
- */
-// const obj = {
-//  name: 'Дмитрий',
-//  getName: () => {
-//    function bar() {
-//      console.log(this.name);
-//    }
-//    bar();
-//  },
-// };
-// obj.getName();
-//Ответ: undefined
-
-/* 5. Что будет выведено в консоль? Ответить не запуская код
- */
-// const obj = {
-//  name: 'Дмитрий',
-//  getName() {
-//    const bar = () => {
-//      console.log(this.name);
-//    }
-//    bar();
-//  },
-// };
-// obj.getName();
-//Ответ: Дмитрий
-
-/* 6. Что будет выведено в консоль? Ответить не запуская код */
-
-// const obj = {
-//  name: 'Дмитрий',
-//  getName() {
-//    console.log(this.name);
-//  },
-// };
- 
-// const obj2 = {
-//  getName: obj.getName,
-// };
- 
-// obj2.getName();
-//Ответ: undefined
-
-/* 7. Что будет выведено в консоль? Ответить не запуская код */
-
-// const getName = () => {
-//  console.log(this.name);
-// };
- 
-// const obj = {
-//  name: 'Дмитрий',
-//  getName,
-// };
- 
-// const obj2 = {
-//  getName,
-// };
-// obj.getName();
-//Ответ: window
-// obj2.getName();
-//Ответ: window
-
-/* 8. Что будет выведено в консоль? Ответить не запуская код */
-
-// const obj = {
-//  name: 'Дмитрий',
-//  friend: {
-//    name: 'Владимир',
-//    getName() {
-//      function innerGetName() {
-//        console.log(this.name);
-//      }
-//      innerGetName();
-//    },
-//  },
-// };
- 
-// obj.friend.getName();
-//Ответ: undefined
-
-/* 9. Что будет выведено в консоль? Ответить не запуская код */
-
-// const obj = {
-//  name: 'Дмитрий',
-//  friend: {
-//    name: 'Владимир',
-//    getName() {
-//      return function() {
-//        console.log(this.name);
-//      }
-//    },
-//  },
-// };
-//  obj.friend.getName()();
-//Ответ: undefined
-
-
-/* 10. Что будет выведено в консоль? Ответить не запуская код */
-// const obj = {
-//  name: 'Дмитрий',
-//  friend: {
-//    name: 'Владимир',
-//    getName() {
-//      return () =>  {
-//        console.log(this.name);
-//      }
-//    },
-//  },
-// };
-// obj.friend.getName()();
-//Ответ: Владимир
-
-// 11. Что будет выведено в консоль? Ответить не запуская код
-// const object = {
-//  		message: 'Hello, World!',
-//  		logMessage() {
-//    		console.log(this.message);
-//  		}
-// };
-// setTimeout(object.logMessage, 1000);
-//Ответ:  в теории передасться тело метода, но это значение ссылочного типа и поэтому скорее всего операция пройдет без вызова и мы не получим this и результатом скорее всего будет undefined
-
-/* 12. Воспользуйтесь функцией logMessage таким образом, чтобы в консоли увидеть сообщение "Hello, World!"
- */
-
-// const object = {
-//  message: 'Hello, World!'
-// };
-// function logMessage() {
-//  console.log(this.message); // "Hello, World!"
-// }
-
-//Ответ: object.logMessage = logMessage();
-
-
-/* 13. Что будет выведено в консоль? Ответить не запуская код */
-// var length = 4;
-// function callback() {
-//  console.log(this.length); // What is logged?       undefined
-// }
-// const object = {
-//  length: 5,
-//  method(callback) { 
-//    callback();
-//  }
-// };
-// object.method(callback, 1, 2);
-//если все как я думаю то передастся в метод тело первой функции и после отработает метод и выведет 5
-
-/* 14. Реализовать объект калькулятора calculator с 3 методами. Первый метод setValues(a, b) присваивает значения свойствам a и b.Второй sum()(обратите внимание, что он не принимает аргументы)  возвращает сумму свойств a и b текущего объекта или сообщение об ошибке, если значения свойств не присвоены. Третий метод mult() возвращает произведение свойств a и b текущего объекта или сообщение об ошибке, если значения свойств не присвоены.
- */
-
-// let calculator = {
-//     setValues(a, b) {
-//         this.a = a;
-//         this.b = b;
+// let user = {
+//     birthDate: '1993-11-06',
+//     get fullName() {
+//         return `${this.lastName} ${this.firstName} ${this.middleName}`;
 //     },
-//     sum() {
-//         if(this.a === undefined || this.b === undefined) {
-//             return 'error';
-//         } else {
-//             return this.a + this.b;
-//         }
+//     get age() {
+//          let age = new Date().getFullYear() - new Date(this.birthDate).getFullYear();
+
+//          return age
 //     },
-//     mult() {
-//         if(this.a === undefined || this.b === undefined) {
-//             return 'error';
-//         } else {
-//             return this.a * this.b;
+//     set fullName(value) {
+//         [this.lastName, this.firstName, this.middleName] = value.split(' ');
+//     },
+// }
+
+// user.fullName = 'Иванов Иван Иванович';
+
+// console.log(user.fullName);
+// console.log(user.age);
+
+/* 2. С помощью замыкания реализовать реализуйте генератор случайных чисел в указанном промежутке (min и max). Важное условие: при генерировании чисел они не должны повторяться. */
+
+// function getRandomNum(min, max) {
+//     return Math.floor(Math.random() * (max - min) + min); 
+// }
+
+// console.log(getRandomNum(9, 28))
+
+/* 3. Что выведет функция?  */
+
+/* function f() {
+  alert( this ); // window
+}
+
+let user = {
+    g: f.bind(null) 
+};
+
+user.g(); */ // возможно window, работает частичное применение функции, мы как бы создали новую функцию, нам надо было передать в bind что нибудь вместо this и мы передали null, если бы были параметры, можно было бы зафиксировать какой нибудь параметр  
+
+/* 4. Можем ли мы изменить this дополнительным связыванием? */
+
+/* function f() {
+  alert(this.name);
+}
+
+f = f.bind( {name: "Вася"} ).bind( {name: "Петя" } ); нельзя, предпологаю что bind вернет что то типо обьекта, и 2 bind  выдаст ошибку при выполнение 
+
+f(); */
+
+/* 5. Вызов askPassword() в приведённом ниже коде должен проверить пароль и затем вызвать user.loginOk/loginFail в зависимости от ответа.
+В текущей реализации Сообщение не соответствует тому, что мы ожидаем увидеть(“Имя пользователя  logged in” или “Имя пользователя failed to log in”)
+
+Исправьте выделенную строку, чтобы всё работало (других строк изменять не надо). */
+
+// function askPassword(ok, fail) {
+//   let password = prompt("Password?", '');
+  
+//   if (password == "rockstar") ok();
+//   else fail();
+// }
+
+// let user = {
+//   name: 'Вася',
+
+//   loginOk() {
+//     console.log(`${this.name} logged in`);
+//   },
+
+//   loginFail() {
+//     console.log(`${this.name} failed to log in`);
+//   },
+
+// };
+
+// askPassword(user.loginOk.bind(user), user.loginFail.bind(user));
+
+/* 6 .Напишите в указанном месте конструкцию с методом bind() так, чтобы this внутри функции func всегда указывал на value */
+
+// let elem = {
+//     value: 'Привет',
+// }
+
+// function func(surname, name) {
+// 	console.log(this.value + ', ' + surname + ' ' + name);
+// }
+
+// let boundFunc = func.bind(elem);
+
+// console.log(boundFunc('Иванов', 'Иван')); //тут должно вывести 'привет, Иванов Иван'
+// console.log(boundFunc('Петров', 'Петр')); //тут должно вывести 'привет, Петров Петр'
+
+/* 7. Есть функция const sum = (a, b, c) => a + b + c, которая складывает три числа. Выполните каррирование. Т.е. напишите вспомогательную функцию currySum, в которую вы передадите функцию sum, и которую можно будет вызвать слуедующим образом -  currySum(a)(b)(c).  */
+
+// const sum = (a, b, c) => a + b + c;
+
+// function currySum(a) {
+//     return function(b) {
+//         return function(c) {
+//             return sum(a, b, c);
 //         }
 //     }
 // }
 
-// console.log(calculator.setValues(5, 2));
-// console.log(calculator.sum());
-// console.log(calculator.mult());
 
-/* 15. Дополнительно: сделать в функции setValues(a, b) проверку и разрешить присвоение только чисел, иначе возвращать сообщение об ошибке.
- */
+// console.log(currySum(5)(3)(4))
 
-/* let calculator = {
-        setValues(a, b) {
-            if(!isNaN(a) && !isNaN(b)) {
-                this.a = a;
-                this.b = b;
-            } else {
-                return 'Ошибка!!! Введите число';
-            }  
-        },
-        sum() {
-            if(this.a === undefined || this.b === undefined) {
-                return 'error';
-            } else {
-                return this.a + this.b;
-            }
-        },
-        mult() {
-            if(this.a === undefined || this.b === undefined) {
-                return 'error';
-            } else {
-                return this.a * this.b;
-            }
-        }
-    } */
-    
-//     console.log(calculator.setValues(5, 3));
-//     console.log(calculator.sum());
-//     console.log(calculator.mult());
+/* 8. Напишите функцию создания задачи(createTask), принимающая название задачи, которая возвращает функцию смены статуса задачи.
+При вызове функции смены статуса возвращается строка с названием задачи и текущим статусом. Список статусов: “Не назначена”, “В работе”, “Тестирование”, “Завершена’. Статус Завершена - присваивается только после передачи флага true и только после тестирования.  Статус Не назначена - только при первом вызове.
+  */
+// function createTask(taskName) {
+//     let status = '';
 
-/* 16. Создать объект calculator2 с 3 методами. 1 метод - setVales(a, b) - создать используя метод из предыдущего задания(можно скопировать по ссылке метод из объекта calculator либо создать функцию setValues, как мы делали на лекции и присвоить обоим объектам). 2 метод - div() - возвращает результат деления a на b. 3 метод - diff() - возвращает разность чисел a и b.
- */
+//     return function task(fl = false) {
+//         let flag = fl;
 
-// let calculatorTwo = {
-// };
+//         if(status === '') {
+//             status = `${taskName} - Не назначена`;
+//             return status
+//         } else if(status === `${taskName} - Не назначена`) {
+//             status = `${taskName} - В работе`;
+//             return status
+//         } else if(status === `${taskName} - В работе`) {
+//             status = `${taskName} - Тестирование`;
+//             return status
+//         } else if(flag === false && status === `${taskName} - Тестирование`) {
+//             status = `${taskName} - В работе`;
+//             return status
+//         } else if(status === `${taskName} - Завершена`) {
+//             return status
+//         }
 
-// let setValues = (a, b) => {
-//     if(!isNaN(a) && !isNaN(b)) {
-//         this.a = a;
-//         this.b = b;
-//     } else {
-//         return 'Ошибка!!! Введите число';
-//     }  
-// };
-
-// calculatorTwo.setValues = setValues;
-
-// calculatorTwo.div = () => this.a / this.b;
-
-// calculatorTwo.diff = () => this.a - this.b;
-
-// console.log(calculatorTwo.setValues(5, 3));
-// console.log(calculatorTwo.div());
-// console.log(calculatorTwo.diff());
-
-/* 17. Создать объект пользователя  user1 со свойствам name, age, city, favoriteColor и методами setName, setAge, setCity, setFavoriteColor, которые меняют значения соответствующих свойств. Создать объект второго юзера user2 из существующего объекта user1. Изменить значения всех свойств второго юзера с помощью методов setName, setAge, setCity, setFavoriteColor. Вывести в консоль оба объекта и убедиться, что значения свойств разные.
- */
-
-// let userOne = {
-//     name: 'Vasya',
-//     age: 23,
-//     city: 'N.Novgorod',
-//     favoriteColor: 'red',
-//     setName(newName) {
-//         this.name = newName;
-//     },
-//     setAge(newAge) {
-//         this.age = newAge;
-//     },
-//     setCity(newCity) {
-//         this.city = newCity;
-//     },
-//     setFavoriteColor(newFavoriteColor) {
-//         this.favoriteColor = newFavoriteColor;
-//     },
+//         if(flag === true && status === `${taskName} - Тестирование`) {
+//             status = `${taskName} - Завершена`;
+//             return status
+//         } 
+//     }
 // }
 
-// let userTwo = Object.assign({}, userOne);
-
-// userTwo.setName('Nicolas');
-// userTwo.setAge(28);
-// userTwo.setCity('Monxeton');
-// userTwo.setFavoriteColor('Blue');
-// console.log(userOne);
-// console.log(userTwo);
-
-
-/* 18. Реализовать функцию, которая принимает в себя любое количество числовых аргументов и возвращает наименьшее число. (не использовать Math.min).*/
-
-// function minNum(...nums) {
-//     return nums.sort((a, b) => a - b)[0];
-// }
-
-// console.log(minNum(5, 3, 4, 6, 8))
-
-/*Исправьте код таким образом, чтобы вывод логов соответствовал комментариями */
-// const func = (user) => {
-//   const otherUser = Object.assign({}, user);
-//   otherUser.name = 'Дмитрий';
-//   otherUser.surName = 'Сидоров';
-//   return otherUser;
-// }
-
-// const  firstUser = {
-//   name: 'Василий',
-//   surName: 'Иванов'
-// }
-
-// console.log(func(firstUser)) // { name: 'Дмитрий', surName: 'Сидоров' }
-
-// console.log(firstUser) // { name: 'Василий', surName: 'Иванов' }
-
-/* 19. Создайте объекты двух персонажей с именами(name) с числовыми характеристиками уровня(level), силы(strength), ловкости(agility) и интелекта(intellect). 
-Для обоих персонажей создайте метод attack, который рассчитывает и возвращает урон атаки путем сложения силы и ловкости, и метод fireball, который возвращает урон файерболом путем умножения интеллекта на уровень персонажа. Далее создайте метод combo, который возвращает сумму значений, которые возвращают методы  attack и fireball. 
-После формирования объектов персонажей создайте функцию startFight, которая принимает в себя два объекта и сравнивает результаты вызовов их методов combo и возвращает строку “Победил ИМЯ_ПЕРСОНАЖА”.
- */
-
-class Pers {
-    constructor(name, level, strength, agility, intellect) {
-        this.name = name;
-        this.level = level;
-        this.strength = strength;
-        this.agility = agility;
-        this.intellect = intellect;
-    }
-
-    attack() {
-        this.strength + this.agility
-    }
-
-    fireball() {
-        this.intellect * this.level 
-    }
-
-    combo() {
-        this.attack() + this.fireball()
-    }
-}
-
-let persOne = new Pers('Poll', 5, 6, 8, 10);
-console.log(persOne)
-
-let persTwo = new Pers('Will', 5, 4, 3, 15);
-console.log(persTwo)
-
-let startFight = (persOne, persTwo) => {
-    if(persOne.combo() > persTwo.combo()) {
-        return `${persOne.name} выйграл` 
-    } else {
-        return `${persTwo.name} выйграл`
-    }
-} 
-
-console.log(startFight(persOne, persTwo));
+// const task = createTask('Название задачи');
+// console.log(task()) // => ‘Название задачи - не назначена’
+// console.log(task()) // => ‘Название задачи - В работе’
+// console.log(task()) // => ‘Название задачи - Тестирование’
+// console.log(task()) // => ‘Название задачи - В работе’
+// console.log(task()) // => ‘Название задачи - Тестирование’
+// console.log(task()) // => ‘Название задачи - В работе’
+// console.log(task()) // => ‘Название задачи - Тестирование’
+// console.log(task(true)) // => ‘Название задачи - Завершена’
+// console.log(task()) // => ‘Название задачи - Завершена’
+// console.log(task())
